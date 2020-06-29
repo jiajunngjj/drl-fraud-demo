@@ -1,0 +1,23 @@
+package com.myspace.drl_fraud;
+import com.myspace.drl_fraud.Result;
+
+// No fraud
+rule "No Fraud"
+	dialect "mvel"
+	when
+        $status: Result (score < 0.7)
+	then
+        $status.setStatus("False");
+		System.out.println( "Status:" + $status.getStatus() );
+end
+
+// Fraud
+rule "Check"
+	dialect "mvel"
+	when
+        $status: Result (score > 0.7)
+	then
+        $status.setStatus("True");
+		System.out.println( "Status:" + $status.getStatus() );
+end
+
